@@ -1,0 +1,12 @@
+#root {
+  max-width: 1280px;
+}
+button {
+  margin-left: 10px;
+}
+
+.repositories {
+  display: block;
+  justify-content: center;
+  align-items: center;
+}
