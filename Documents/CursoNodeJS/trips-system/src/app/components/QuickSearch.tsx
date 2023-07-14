@@ -1,7 +1,7 @@
 import Image from "next/image";
 import React from "react";
 
-export const QuickSearch = () => {
+const QuickSearch = () => {
   return (
     <div className="container mx-auto p-5">
       <div className="flex items-center">
@@ -39,3 +39,5 @@ export const QuickSearch = () => {
     </div>
   );
 };
+
+export default QuickSearch;

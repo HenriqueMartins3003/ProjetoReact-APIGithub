@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 import Input from "@/components/Inpunt";
 import DatePicker from "@/components/DatePicker";
