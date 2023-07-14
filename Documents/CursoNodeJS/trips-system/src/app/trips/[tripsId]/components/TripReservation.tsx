@@ -26,7 +26,7 @@ const TripReservation = ({ trip }: TripReservationProps) => {
       </div>
       <Input
         placeholder={`Número de hóspedes (max: ${trip.maxGuests})`}
-        className="mt-05"
+        className="mt-5"
       />
 
       <div className="flex justify-between mt-3">
