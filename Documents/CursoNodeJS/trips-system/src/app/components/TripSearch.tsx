@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import Input from "@/components/Inpunt";
+import Input from "@/components/Input";
 import DatePicker from "@/components/DatePicker";
 import CurrencyInput from "@/components/CurrencyInput";
 import Button from "@/components/Button";
