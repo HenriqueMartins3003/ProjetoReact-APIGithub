@@ -1,6 +1,7 @@
 "use client";
 import { signIn, signOut, useSession } from "next-auth/react";
 import Image from "next/image";
+import Link from "next/link";
 import React, { useState } from "react";
 import { AiOutlineMenu } from "react-icons/ai";
 
@@ -11,7 +12,9 @@ const Header = () => {
   const handleLoginClick = () => {
     signIn();
   };
-  const handleMenuClick = () => setMenuIsopen(true);
+  const handleMenuClick = () => {
+    menuIsopen ? setMenuIsopen(false) : setMenuIsopen(true);
+  };
   const handleLogoutClick = () => {
     setMenuIsopen(false);
     signOut();
@@ -19,14 +22,16 @@ const Header = () => {
 
   return (
     <div className="container mx-auto p-5 py-0 h-[93px] flex justify-between items-center">
-      <div className="relative h-[32] w-[182]">
-        <Image
-          src="/Logo.png"
-          alt="Logo FullStack Week"
-          height={32}
-          width={182}
-        />
-      </div>
+      <Link href="/">
+        <div className="relative h-[32] w-[182]">
+          <Image
+            src="/Logo.png"
+            alt="Logo FullStack Week"
+            height={32}
+            width={182}
+          />
+        </div>
+      </Link>
 
       {status === "unauthenticated" && (
         <button
