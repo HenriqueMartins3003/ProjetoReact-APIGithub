@@ -5,6 +5,7 @@ import ReactCountryFlag from "react-country-flag";
 import TripHeader from "./components/TripHeader";
 import TripReservation from "./components/TripReservation";
 import TripDescription from "./components/TripDescription";
+import TripHighLights from "./components/TripHighLights";
 
 const getTripDetails = async (tripsID: string) => {
   const trip = prisma.trip.findUnique({
@@ -25,6 +26,7 @@ const TripDetails = async ({ params }: { params: { tripsId: string } }) => {
       <TripHeader trip={trip} />
       <TripReservation trip={trip} />
       <TripDescription description={trip.description} />
+      <TripHighLights highlights={trip.highlights} />
     </div>
   );
 };
