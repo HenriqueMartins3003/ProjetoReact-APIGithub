@@ -2,7 +2,6 @@
 import Button from "@/components/Button";
 import DatePicker from "@/components/DatePicker";
 import Input from "@/components/Input";
-import { Trip } from "@prisma/client";
 import { differenceInDays } from "date-fns";
 import React from "react";
 import { Controller, useForm } from "react-hook-form";
@@ -12,6 +11,7 @@ interface TripReservationProps {
   tripEndDate: Date;
   maxGuests: number;
   pricePerDay: number;
+  tripId: string;
 }
 
 interface TripReservarionForm {
@@ -21,6 +21,7 @@ interface TripReservarionForm {
 }
 
 const TripReservation = ({
+  tripId,
   pricePerDay,
   maxGuests,
   tripStartDate,
@@ -31,11 +32,49 @@ const TripReservation = ({
     handleSubmit,
     formState: { errors },
     watch,
+    setError,
     control,
   } = useForm<TripReservarionForm>();
 
-  const onSubmit = (data: any) => {
-    console.log(data);
+  const validDateReservation = (errorCode: string) => {
+    if (!errorCode) {
+      console.log("Sem erros!!!!!!");
+      return;
+    }
+
+    if (errorCode === "Trip_Already_Reserved") {
+      setError("startDate", {
+        type: "manual",
+        message: "Essa data já está reservada.",
+      });
+
+      setError("endDate", {
+        type: "manual",
+        message: "Essa data já está reservada.",
+      });
+    }
+
+    if (errorCode === "Invalid_Start_Date") {
+      setError("startDate", {
+        type: "manual",
+        message: "Data Inválida",
+      });
+    }
+  };
+
+  const onSubmit = async (data: TripReservarionForm) => {
+    const response = await fetch("http://localhost:3000//api/trips/check", {
+      method: "POST",
+      body: Buffer.from(
+        JSON.stringify({
+          startDate: data.startDate,
+          endDate: data.endDate,
+          tripId,
+        })
+      ),
+    });
+    const res = await response.json();
+    validDateReservation(res?.error?.code);
   };
 
   const startDate = watch("startDate");
