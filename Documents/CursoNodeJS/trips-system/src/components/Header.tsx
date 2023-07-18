@@ -21,7 +21,7 @@ const Header = () => {
   };
 
   return (
-    <div className="container mx-auto p-5 py-0 h-[93px] flex justify-between items-center">
+    <div className="container mx-auto p-5 py-0 h-[93px] flex justify-between items-center border-b border-solid border-grayLighter">
       <Link href="/">
         <div className="relative h-[32] w-[182]">
           <Image

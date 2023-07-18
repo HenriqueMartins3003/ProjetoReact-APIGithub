@@ -3,6 +3,7 @@ import Button from "@/components/Button";
 import DatePicker from "@/components/DatePicker";
 import Input from "@/components/Input";
 import { differenceInDays } from "date-fns";
+import { useRouter } from "next/navigation";
 import React from "react";
 import { Controller, useForm } from "react-hook-form";
 
@@ -37,9 +38,11 @@ const TripReservation = ({
   } = useForm<TripReservarionForm>();
 
   const validDateReservation = (errorCode: string) => {
+    let valid;
+
     if (!errorCode) {
-      console.log("Sem erros!!!!!!");
-      return;
+      valid = true;
+      return valid;
     }
 
     if (errorCode === "Trip_Already_Reserved") {
@@ -48,19 +51,21 @@ const TripReservation = ({
         message: "Essa data já está reservada.",
       });
 
-      setError("endDate", {
+      return setError("endDate", {
         type: "manual",
         message: "Essa data já está reservada.",
       });
     }
 
     if (errorCode === "Invalid_Start_Date") {
-      setError("startDate", {
+      return setError("startDate", {
         type: "manual",
         message: "Data Inválida",
       });
     }
   };
+
+  const router = useRouter();
 
   const onSubmit = async (data: TripReservarionForm) => {
     const response = await fetch("http://localhost:3000//api/trips/check", {
@@ -74,7 +79,14 @@ const TripReservation = ({
       ),
     });
     const res = await response.json();
-    validDateReservation(res?.error?.code);
+    const valid = validDateReservation(res?.error?.code);
+    if (valid) {
+      router.push(
+        `/trips/${tripId}/confirmation?startDate=${data.startDate?.toISOString()}&endDate=${data.endDate?.toISOString()}&guests=${
+          data.guests
+        }`
+      );
+    }
   };
 
   const startDate = watch("startDate");
@@ -124,11 +136,16 @@ const TripReservation = ({
       <Input
         {...register("guests", {
           required: { value: true, message: "Número de hóspedes obrigatório" },
+          max: {
+            value: maxGuests,
+            message: `Número máximo de hóspedes é ${maxGuests}`,
+          },
         })}
         placeholder={`Número de hóspedes (max: ${maxGuests})`}
         className="mt-5"
         error={!!errors?.guests}
         errorMessage={errors?.guests?.message}
+        type="number"
       />
 
       <div className="flex justify-between mt-3">
