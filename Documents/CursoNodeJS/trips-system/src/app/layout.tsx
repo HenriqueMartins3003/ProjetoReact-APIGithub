@@ -3,6 +3,7 @@ import { Poppins } from "next/font/google";
 import { NextProvider } from "@/provider/auth";
 import Header from "../components/Header";
 import Footer from "@/components/Footer";
+import ToastProvider from "@/provider/toast";
 const poppins = Poppins({
   subsets: ["latin"],
   weight: ["400", "500", "600", "700", "800", "900"],
@@ -22,10 +23,12 @@ export default function RootLayout({
     <html lang="en">
       <body className={poppins.className}>
         <NextProvider>
-          <Header />
-          {children}
+          <ToastProvider>
+            <Header />
+            {children}
 
-          <Footer />
+            <Footer />
+          </ToastProvider>
         </NextProvider>
       </body>
     </html>

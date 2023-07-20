@@ -17,8 +17,8 @@ const getTripDetails = async (tripsID: string) => {
   return trip;
 };
 
-const TripDetails = async ({ params }: { params: { tripsId: string } }) => {
-  const trip = await getTripDetails(params.tripsId);
+const TripDetails = async ({ params }: { params: { tripId: string } }) => {
+  const trip = await getTripDetails(params.tripId);
 
   if (!trip) return null;
 

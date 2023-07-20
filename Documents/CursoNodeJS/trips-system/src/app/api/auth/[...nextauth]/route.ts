@@ -13,6 +13,19 @@ export const authOptions: AuthOptions = {
       clientSecret: "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",
     }),
   ],
+  secret: "M@rt!ns3003*",
+
+  callbacks: {
+    async session({ session, token, user }) {
+      session.user = { ...session.user, id: user.id } as {
+        id: string;
+        name: string;
+        email: string;
+      };
+
+      return session;
+    },
+  },
 };
 
 const handler = NextAuth(authOptions);
