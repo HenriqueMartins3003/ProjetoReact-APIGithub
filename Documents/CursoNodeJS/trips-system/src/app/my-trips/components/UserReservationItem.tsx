@@ -13,9 +13,13 @@ interface UserReservationItemProps {
   reservation: Prisma.TripReservationGetPayload<{
     include: { trip: true };
   }>;
+  fetchReservations: () => void;
 }
 
-const UserReservationItem = ({ reservation }: UserReservationItemProps) => {
+const UserReservationItem = ({
+  reservation,
+  fetchReservations,
+}: UserReservationItemProps) => {
   const router = useRouter();
 
   const handleDeleteClick = async () => {
@@ -31,7 +35,7 @@ const UserReservationItem = ({ reservation }: UserReservationItemProps) => {
       position: "bottom-center",
     });
 
-    router.refresh();
+    fetchReservations();
   };
   return (
     <div className="container mx-auto p-5">
