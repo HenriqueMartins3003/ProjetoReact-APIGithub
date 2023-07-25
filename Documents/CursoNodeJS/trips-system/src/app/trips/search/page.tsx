@@ -21,6 +21,7 @@ const Trips = () => {
       setTrips(data);
     };
     fetchTrips();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

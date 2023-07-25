@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import React from "react";
 
 const QuickSearch = () => {
@@ -17,22 +18,30 @@ const QuickSearch = () => {
       </div>
       <div className="flex w-full justify-between mt-4">
         <div className="flex flex-col items-center gap-1">
-          <Image width={30} height={30} src="/hotel-icon.png" alt="Hotel" />
+          <Link href={`/trips/search?text=hotel`}>
+            <Image width={30} height={30} src="/hotel-icon.png" alt="Hotel" />
+          </Link>
           <p className="text-sm text-grayPrimary">Hotel</p>
         </div>
 
         <div className="flex flex-col items-center gap-1">
-          <Image width={30} height={30} src="/farm-icon.png" alt="Fazenda" />
+          <Link href={`/trips/search?text=fazenda`}>
+            <Image width={30} height={30} src="/farm-icon.png" alt="Fazenda" />
+          </Link>
           <p className="text-sm text-grayPrimary">Fazenda</p>
         </div>
 
         <div className="flex flex-col items-center gap-1">
-          <Image width={30} height={30} src="/cottage-icon.png" alt="Chalé" />
+          <Link href={`/trips/search?text=chalé`}>
+            <Image width={30} height={30} src="/cottage-icon.png" alt="Chalé" />
+          </Link>
           <p className="text-sm text-grayPrimary">Chalé</p>
         </div>
 
         <div className="flex flex-col items-center gap-1">
-          <Image width={30} height={30} src="/inn-icon.png" alt="Pousada" />
+          <Link href={`/trips/search?text=Pousada`}>
+            <Image width={30} height={30} src="/inn-icon.png" alt="Pousada" />
+          </Link>
           <p className="text-sm text-grayPrimary">Pousada</p>
         </div>
       </div>
